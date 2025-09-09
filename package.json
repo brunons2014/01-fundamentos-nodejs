@@ -1,0 +1,14 @@
+{"name": "01-fundamentos-nodejs",
+ "version": "1.0.0",
+ "description": "Projeto de estudos do curso de Fundamentos do Node.js da Rocketseat",
+ "main": "index.js",
+ "scripts": {
+   "dev": "node --watch src/server.js"
+ },
+ "keywords": [],
+ "author": "Bruno Henrique",
+ "license": "ISC",
+ "devDependencies": {
+   "nodemon": "^2.0.22"
+ }
+}

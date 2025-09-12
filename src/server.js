@@ -32,12 +32,12 @@ const server = http.createServer((req, res) => {
             name: 'John Doe',
             email: 'johndoe@example.com'
         })
-        return res.end('Cadastro de usuários')
+        return res.writeHead(201).end()
     }
 
     console.log(method, url)
 
-    return res.end('Hello World')
+    return res.writeHead(404).end('Not found')
 })
 server.listen(3333)
 //CommonJS => require

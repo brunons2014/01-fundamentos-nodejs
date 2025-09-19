@@ -1,5 +1,6 @@
 import http  from 'node:http'
 import { json } from './middlewares/json.js'
+import { Database } from './database.js'
 
 // GET => Buscar uma informação (Listar)
 // POST => Criar uma informação (Cadastrar)
@@ -15,8 +16,7 @@ import { json } from './middlewares/json.js'
 // Stateless => A cada requisição o cliente precisa mandar todas as informações para o servidor (Autenticação, Token, JWT)
 
 // Cabeçalhos (Requisição e Resposta) => Metadados (Informações sobre a requisição ou resposta)
-
-const users = []
+const database = new Database()
  
 const server = http.createServer(async (req, res) => {
     const { method, url } = req
@@ -25,18 +25,22 @@ const server = http.createServer(async (req, res) => {
 
 
     if (method === 'GET' && url === '/users') {
-        return res
-        .end(JSON.stringify(users))
+        const users = database.select('users')
+
+        return res.end(JSON.stringify(users))
     }
 
     if (method === 'POST' && url === '/users') {
         const { name, email } = req.body
 
-        users.push({
+        const user ={
             id: 1,
             name,
             email,
-        })
+        }
+
+        database.insert('users', user)
+
         return res.writeHead(201).end()
     }
 
